@@ -1,6 +1,7 @@
 import React from "react"
+import { useState } from "react"
 
-class Form extends React.Component {
+/*class Form extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,6 +33,21 @@ class Form extends React.Component {
             </form>
         );
     }
+} */
+// same refactoring as App.js
+function Form(props) {
+    const [value, setValue] = useState('');
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        props.submitFunc(value);
+    }
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input type="text" id="inputField" placeholder={props.placeholder} value={value} onChange={(e) => setValue(e.target.value)}/>
+        </form>
+    );
 }
 
 export default Form
